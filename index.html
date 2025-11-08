@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculadora de Descuento 💸 | CalcSmart</title>
+  <meta name="description" content="Calcula fácil el precio final de tus compras con la calculadora de descuentos más rápida y precisa. 100% gratis.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2563eb;
+      --bg: #ffffff;
+      --text: #0f172a;
+      --light: #f1f5f9;
+      --shadow: rgba(0,0,0,0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+
+    body {
+      background: var(--light);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      padding: 2rem 1rem;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    h1 {
+      font-size: 1.9rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    p.subtitle {
+      font-size: 1rem;
+      color: #475569;
+    }
+
+    .card {
+      background: var(--bg);
+      box-shadow: 0 4px 10px var(--shadow);
+      border-radius: 1rem;
+      padding: 2rem;
+      max-width: 400px;
+      width: 100%;
+      transition: 0.3s ease;
+    }
+
+    label {
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+      display: block;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.75rem;
+      border-radius: 0.5rem;
+      border: 1px solid #cbd5e1;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(37,99,235,0.15);
+    }
+
+    button {
+      background: var(--primary);
+      color: white;
+      font-size: 1rem;
+      padding: 0.75rem;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      width: 100%;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .result {
+      display: none;
+      margin-top: 1.5rem;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      text-align: center;
+      font-weight: 600;
+      background: #f0fdf4;
+      color: #16a34a;
+    }
+
+    footer {
+      margin-top: 2rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #64748b;
+    }
+
+    footer a { color: var(--primary); text-decoration: none; }
+
+    @media (max-width: 480px) {
+      h1 { font-size: 1.6rem; }
+      .card { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>💸 Calculadora de Descuento</h1>
+    <p class="subtitle">Descubre el precio final de tus compras al instante</p>
+  </header>
+
+  <div class="card">
+    <label for="price">Precio original (S/)</label>
+    <input type="number" id="price" placeholder="Ej: 250" />
+
+    <label for="discount">Descuento (%)</label>
+    <input type="number" id="discount" placeholder="Ej: 15" />
+
+    <button onclick="calculateDiscount()">Calcular</button>
+
+    <div id="result" class="result"></div>
+
+    <!-- 🔸 Espacio para anuncio AdSense -->
+    <div style="margin-top: 20px; text-align:center;">
+      <!-- Pega aquí tu script de AdSense cuando te aprueben -->
+    </div>
+  </div>
+
+  <footer>
+    © 2025 <strong>CalcSmart</strong> — Herramientas rápidas y gratuitas<br>
+    <a href="politica.html">Política de Privacidad</a> | <a href="contacto.html">Contacto</a>
+  </footer>
+
+  <script>
+    function calculateDiscount() {
+      const price = parseFloat(document.getElementById("price").value);
+      const discount = parseFloat(document.getElementById("discount").value);
+      const resultDiv = document.getElementById("result");
+
+      if (isNaN(price) || isNaN(discount)) {
+        resultDiv.style.display = "block";
+        resultDiv.style.background = "#fef2f2";
+        resultDiv.style.color = "#dc2626";
+        resultDiv.innerHTML = "Por favor ingresa ambos valores correctamente.";
+        return;
+      }
+
+      const discountAmount = (price * discount) / 100;
+      const finalPrice = price - discountAmount;
+
+      resultDiv.style.display = "block";
+      resultDiv.style.background = "#f0fdf4";
+      resultDiv.style.color = "#16a34a";
+      resultDiv.innerHTML = `
+        Precio original: S/ ${price.toFixed(2)}<br>
+        Descuento: ${discount}%<br>
+        💰 <strong>Precio final: S/ ${finalPrice.toFixed(2)}</strong>
+      `;
+    }
+  </script>
+</body>
+</html>
